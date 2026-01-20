@@ -12,23 +12,21 @@ enum UserRole {
   STUDENT
 }
 
-enum AttendanceStatus {
-  PRESENT
-  ABSENT
-  LATE
-}
-
 model User {
   id        Int      @id @default(autoincrement())
   name      String
   email     String   @unique
   role      UserRole
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
+  // teacher -> courses
   taughtCourses Course[] @relation("TeacherCourses")
-  enrollments   Enrollment[]
-  attendance    AttendanceRecord[]
+
+  // student -> enrollments
+  enrollments Enrollment[]
+
+  // student -> attendance records
+  attendanceRecords AttendanceRecord[]
 }
 
 model Course {
@@ -36,9 +34,9 @@ model Course {
   title     String
   teacherId Int
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  teacher     User         @relation("TeacherCourses", fields: [teacherId], references: [id])
+  teacher User @relation("TeacherCourses", fields: [teacherId], references: [id])
+
   enrollments Enrollment[]
   lessons     Lesson[]
 }
@@ -52,7 +50,7 @@ model Enrollment {
   student User   @relation(fields: [studentId], references: [id])
   course  Course @relation(fields: [courseId], references: [id])
 
-  @@unique([studentId, courseId])
+  @@unique([studentId, courseId]) // студент не може бути двічі записаний на один курс
 }
 
 model Lesson {
@@ -62,22 +60,24 @@ model Lesson {
   topic     String?
   createdAt DateTime @default(now())
 
-  course      Course             @relation(fields: [courseId], references: [id])
-  attendance  AttendanceRecord[]
+  course Course @relation(fields: [courseId], references: [id])
+
+  attendance AttendanceRecord[]
 }
 
 model AttendanceRecord {
-  id             Int              @id @default(autoincrement())
-  lessonId       Int
-  studentId      Int
-  status         AttendanceStatus
-  activityPoints Int              @default(0)
-  comment        String?
-  createdAt      DateTime         @default(now())
-  updatedAt      DateTime         @updatedAt
+  id        Int @id @default(autoincrement())
+  lessonId  Int
+  studentId Int
+
+  present  Boolean @default(false)
+  activity Int     @default(0) // 0..10 або будь-яка шкала
+  note     String?
+
+  createdAt DateTime @default(now())
 
   lesson  Lesson @relation(fields: [lessonId], references: [id])
   student User   @relation(fields: [studentId], references: [id])
 
-  @@unique([lessonId, studentId])
+  @@unique([lessonId, studentId]) // на 1 занятті 1 запис на студента
 }
