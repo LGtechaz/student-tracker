@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16
+    container_name: student_tracker_db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: student_tracker
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+volumes:
+  db_data:
