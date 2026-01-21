@@ -66,18 +66,21 @@ model Lesson {
 }
 
 model AttendanceRecord {
-  id        Int @id @default(autoincrement())
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   lessonId  Int
   studentId Int
 
   present  Boolean @default(false)
-  activity Int     @default(0) // 0..10 або будь-яка шкала
+  activity Int     @default(0)
   note     String?
 
-  createdAt DateTime @default(now())
+  lesson  Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  student User   @relation(fields: [studentId], references: [id], onDelete: Cascade)
 
-  lesson  Lesson @relation(fields: [lessonId], references: [id])
-  student User   @relation(fields: [studentId], references: [id])
-
-  @@unique([lessonId, studentId]) // на 1 занятті 1 запис на студента
+  @@unique([lessonId, studentId])
+  @@index([studentId])
+  @@index([lessonId])
 }

@@ -7,11 +7,12 @@ import { UsersModule } from './users/users.module';
 import { CoursesModule } from './courses/courses.module';
 import { EnrollmentModule } from './enrollment/enrollment.module';
 import { LessonsModule } from './lessons/lessons.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }), // <-- перший
-    PrismaModule, UsersModule, CoursesModule, EnrollmentModule, LessonsModule,
+    PrismaModule, UsersModule, CoursesModule, EnrollmentModule, LessonsModule,AttendanceModule,
   ],
   controllers: [AppController],
   providers: [AppService],
