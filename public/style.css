@@ -53,3 +53,7 @@ button:hover {
 .nav button {
   margin-right: 5px;
 }
+#swagger{
+    border: 1px solid black;
+    background-color: greenyellow;
+}
