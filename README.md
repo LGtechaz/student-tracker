@@ -1,6 +1,5 @@
-# 🎓 Student Tracker API
-
-Backend API for managing students, courses, lessons, enrollments, and attendance tracking.  
+# 🎓 Student Tracker 
+ managing students, courses, lessons, enrollments, and attendance tracking.  
 Built with NestJS, Prisma, and PostgreSQL.
 
 ---
