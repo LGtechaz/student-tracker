@@ -120,15 +120,3 @@ Built with NestJS, Prisma, and PostgreSQL.
 
 ---
 
-## 📊 Attendance Summary Output
-
-```json
-{
-  "studentId": 1,
-  "courseId": 2,
-  "totalLessons": 10,
-  "recordsCount": 9,
-  "presentCount": 8,
-  "attendancePercent": 80,
-  "avgActivity": 4.5
-}
