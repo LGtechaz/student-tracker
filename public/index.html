@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Student Tracker</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<h1>Student Tracker</h1>
+<div class="nav">
+  <button type="button" data-scroll="users">Користувачі</button>
+  <button type="button" data-scroll="courses">Курси</button>
+  <button type="button" data-scroll="lessons">Заняття</button>
+  <button type="button" data-scroll="enrollment">Запис</button>
+  <button type="button" data-scroll="attendance">Відвідуваність</button>
+  <a class="small" href="/api" target="_blank" rel="noopener">Swagger</a>
+</div>
+
+<section id="users">
+  <h2>Користувачі</h2>
+
+  <label>Ім’я <input id="userName" value="Іван Петренко"></label>
+  <label>Email <input id="userEmail" value="ivan@email.com"></label>
+  <label>
+    Роль
+    <select id="userRole">
+      <option value="STUDENT">STUDENT</option>
+      <option value="TEACHER">TEACHER</option>
+    </select>
+  </label>
+  <button type="button" id="btnCreateUser">Створити</button>
+  <button type="button" id="btnReloadUsers">Оновити</button>
+
+  <div class="list" id="usersList">Список користувачів: порожньо</div>
+</section>
+
+<section id="courses">
+  <h2>Курси</h2>
+
+  <label>Назва <input id="courseTitle" value="Math 101"></label>
+  <label>ID викладача <input id="courseTeacherId" type="number" value="1"></label>
+  <button type="button" id="btnCreateCourse">Створити</button>
+  <button type="button" id="btnReloadCourses">Оновити</button>
+
+  <div class="list" id="coursesList">Список курсів: порожньо</div>
+</section>
+
+<section id="lessons">
+  <h2>Заняття</h2>
+
+  <label>Назва <input id="lessonTitle" value="Заняття 1"></label>
+  <label>ID курсу <input id="lessonCourseId" type="number" value="1"></label>
+  <label>Дата (ISO) <input id="lessonDate" value="2026-01-21T10:00:00.000Z"></label>
+  <button type="button" id="btnCreateLesson">Створити</button>
+  <button type="button" id="btnReloadLessons">Оновити</button>
+
+  <div class="list" id="lessonsList">Список занять: порожньо</div>
+</section>
+
+<section id="enrollment">
+  <h2>Запис на курс</h2>
+
+  <label>ID студента <input id="enrollStudentId" type="number" value="2"></label>
+  <label>ID курсу <input id="enrollCourseId" type="number" value="1"></label>
+  <button type="button" id="btnEnroll">Записати</button>
+
+  <h3>Студенти курсу</h3>
+  <label>ID курсу <input id="studentsOfCourseId" type="number" value="1"></label>
+  <button type="button" id="btnLoadStudentsOfCourse">Завантажити</button>
+  <div class="list" id="studentsOfCourseList">Порожньо</div>
+</section>
+
+<section id="attendance">
+  <h2>Відвідуваність</h2>
+
+  <label>ID заняття <input id="attLessonId" type="number" value="1"></label>
+  <label>ID студента <input id="attStudentId" type="number" value="2"></label>
+  <label>
+    Присутній
+    <select id="attPresent">
+      <option value="true">так</option>
+      <option value="false">ні</option>
+    </select>
+  </label>
+  <label>Активність <input id="attActivity" type="number" value="5"></label>
+  <label>Нотатка <input id="attNote" value=""></label>
+  <button type="button" id="btnSaveAttendance">Зберегти</button>
+
+  <h3>Відвідуваність по заняттю</h3>
+  <label>ID заняття <input id="attListLessonId" type="number" value="1"></label>
+  <button type="button" id="btnLoadAttendanceByLesson">Завантажити</button>
+  <div class="list" id="attendanceByLessonList">Порожньо</div>
+
+  <h3>Підсумок студента</h3>
+  <label>ID студента <input id="sumStudentId" type="number" value="2"></label>
+  <label>ID курсу <input id="sumCourseId" type="number" value="1"></label>
+  <button type="button" id="btnLoadStudentSummary">Завантажити</button>
+  <div class="list" id="studentSummaryBox">Порожньо</div>
+</section>
+
+<script src="/app.js" defer></script>
+</body>
+</html>
